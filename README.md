@@ -1,6 +1,6 @@
 # Katinat Captive Portal (NHOM 8) 
 
-## 1. Tên dự án và mô tả ngắn gọn
+## 1. Tổng quan
 
 **Hệ thống Captive Portal cho chuỗi cà phê Katinat Saigon Cafe**
 
