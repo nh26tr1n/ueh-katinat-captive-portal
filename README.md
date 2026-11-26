@@ -1,6 +1,6 @@
 # Katinat Captive Portal (Nhóm 8)
 
-> **Deploy dụ án quaV Vercel :** [https://ueh-katinat-captive-portal.vercel.app/portal](https://ueh-katinat-captive-portal.vercel.app/portal)
+> **Deploy dụ án qua Vercel :** [https://ueh-katinat-captive-portal.vercel.app/portal](https://ueh-katinat-captive-portal.vercel.app/portal)
 
 ## 1. Giới thiệu tổng quan
 
