@@ -46,74 +46,19 @@ Dự án gồm ứng dụng web Next.js và các migration cơ sở dữ liệu 
 ```text
 katinat-guest-wifi/
 ├── app/
-│   ├── (portal)/                         # Route Group dành cho trang khách; không tạo tiền tố URL
-│   │   ├── login/page.tsx                # Chuyển hướng trang login cũ sang Portal
-│   │   ├── page.tsx                      # Chuyển hướng trang gốc sang /portal
-│   │   └── portal/page.tsx               # Trang Captive Portal dành cho khách
-│   ├── admin/                            # Giao diện quản trị
-│   │   ├── analytics/                    # Biểu đồ và số liệu phân tích
-│   │   ├── campaigns/                    # Danh sách, tạo mới và chi tiết campaign
-│   │   ├── customers/                    # Danh sách và chi tiết khách hàng
-│   │   ├── dashboard/                    # Các chỉ số tổng quan
-│   │   ├── devices/                      # Danh sách thiết bị
-│   │   ├── send-email/                   # Form gửi email marketing qua SMTP
-│   │   ├── sessions/                     # Danh sách phiên Wi-Fi
-│   │   ├── vouchers/                     # Quản lý, redeem và xem chi tiết voucher
-│   │   ├── error.tsx                     # Error Boundary của khu vực Admin
-│   │   ├── layout.tsx                    # Bố cục chung cho Admin
-│   │   └── loading.tsx                   # Trạng thái tải của khu vực Admin
-│   ├── api/                              # API Routes của ứng dụng
-│   │   ├── admin/export-csv/             # Xuất dữ liệu khách hàng CSV
-│   │   ├── auth/callback/                 # Xử lý callback OAuth
-│   │   ├── campaigns/                    # API campaign và gửi campaign
-│   │   ├── consent/                      # Ghi nhận consent nhận marketing
-│   │   ├── profile/                      # Cập nhật hồ sơ khách
-│   │   ├── send-smtp/                    # Gửi email qua Gmail SMTP
-│   │   ├── sessions/                     # Tạo, heartbeat và kết thúc session
-│   │   ├── unsubscribe/                  # Xử lý hủy đăng ký email
-│   │   └── vouchers/                     # Tạo, cập nhật, campaign và redeem voucher
-│   ├── error.tsx                         # Error Boundary cấp ứng dụng
-│   ├── global-error.tsx                 # Xử lý lỗi ở Root Layout
-│   ├── globals.css                      # Global styles và Tailwind directives
-│   └── layout.tsx                       # Root Layout, locale provider và thông báo
-├── components/
-│   ├── admin/                            # Bảng, form và thao tác của Admin
-│   ├── charts/                           # Biểu đồ dashboard và analytics
-│   ├── dashboard/                       # Thẻ thống kê và bộ lọc thời gian
-│   ├── portal/                           # Login, consent, hồ sơ và luồng Portal
-│   └── ui/                               # Thành phần UI dùng chung (shadcn/ui)
-├── hooks/                                # React hooks, gồm session heartbeat/end
-├── lib/
-│   ├── auth/                             # Lấy user hiện tại và kiểm tra quyền Admin
-│   ├── brevo/                            # Khởi tạo Brevo client
-│   ├── email/                            # Chuẩn hóa HTML, unsubscribe và email template
-│   ├── i18n/                             # Cấu hình next-intl
-│   ├── network/                          # Tạo fingerprint và nhận diện thiết bị
-│   ├── services/                         # Truy vấn analytics, customer, session, voucher, campaign
-│   ├── supabase/
-│   │   ├── admin.ts                     # Supabase client server-side có quyền admin
-│   │   ├── client.ts                    # Supabase client phía trình duyệt
-│   │   └── server.ts                    # Supabase client phía server với cookies
-│   ├── validations/
-│   │   └── index.ts                     # Zod schema cho campaign và voucher
-│   └── utils.ts                         # Hàm tiện ích chung, ví dụ cn()
-├── locales/
-│   ├── en.json                           # Chuỗi giao diện tiếng Anh
-│   └── vi.json                           # Chuỗi giao diện tiếng Việt
-├── public/
-│   ├── images/portal/                    # Hình ảnh dùng trong Guest Portal
-│   └── report_images/                    # Ảnh chụp giao diện phục vụ báo cáo
-├── scripts/
-│   └── capture-report-screenshots.mjs    # Script chụp ảnh giao diện báo cáo
-├── supabase/
-│   └── migrations/                       # SQL migrations: schema, seed, RPC và index
-├── types/
-│   └── index.ts                          # Database typing và domain types dùng chung
-├── middleware.ts                         # Làm mới session và bảo vệ đường dẫn /admin
-├── next.config.js                        # Cấu hình Next.js và next-intl
-├── package.json                          # Dependencies và npm scripts
-├── tailwind.config.ts                    # Cấu hình Tailwind CSS
-└── tsconfig.json                         # TypeScript và alias @/
+│   ├── (portal)/           # Giao diện Captive Portal cho khách (/portal) và điều hướng đăng nhập
+│   ├── admin/              # Giao diện cho quản trị viên (dashboard, analytics, customers, sessions, devices, vouchers, campaigns, send-email)
+│   ├── api/                # API Routes (auth callback, sessions, profile, consent, vouchers, campaigns, send-smtp, export-csv, unsubscribe)
+│   └── layout.tsx          # Root Layout, global styles và xử lý lỗi cấp ứng dụng
+├── components/             # UI components chia theo khu vực: portal/, admin/, dashboard/, charts/ và ui/ (shadcn/ui)
+├── hooks/                  # Custom React hooks (quản lý session heartbeat và ngắt kết nối)
+├── lib/                    # Nơi xử lý logic chính: kết nối database Supabase, kiểm tra quyền admin, gửi email (Brevo/Gmail) và kiểm tra dữ liệu đầu vào
+├── locales/                # File ngôn ngữ tiếng Việt (vi.json) và tiếng Anh (en.json)
+├── public/                 # Chứa hình ảnh hiển thị trên trang đăng nhập Wi-Fi
+├── scripts/                # Script hỗ trợ chụp ảnh giao diện tự động
+├── supabase/migrations/    # Các file lệnh SQL dùng để tạo bảng, cấu trúc dữ liệu và dữ liệu mẫu trên Supabase
+├── types/                  #  Khai báo kiểu dữ liệu dùng chung để tránh lỗi code trong toàn dự án
+└── middleware.ts           # Làm mới session Supabase và phân quyền truy cập /admin
 ```
 
 ### Luồng kết nối chính
