@@ -1,5 +1,7 @@
 # Katinat Captive Portal (Nhóm 8)
 
+> **Deploy dụ án quaV Vercel :** [https://ueh-katinat-captive-portal.vercel.app/portal](https://ueh-katinat-captive-portal.vercel.app/portal)
+
 ## 1. Giới thiệu tổng quan
 
 Katinat Captive Portal là hệ thống cung cấp trang đăng nhập Wi-Fi cho khách hàng tại Katinat Saigon Cafe. Khách xác thực để sử dụng mạng Wi-Fi; hệ thống lưu thông tin hồ sơ và phiên truy cập vào Supabase, đồng thời hỗ trợ quản trị viên theo dõi hoạt động và gửi email marketing đến những khách đã đồng ý nhận tin.
@@ -81,7 +83,7 @@ katinat-guest-wifi/
 4. Các thao tác và API được xử lý trong `app/api/`. Schema dữ liệu đầu vào được tập trung tại `lib/validations/index.ts`.
 5. Cấu trúc dữ liệu và các hàm SQL được định nghĩa trong `supabase/migrations/`; TypeScript types nằm tại `types/index.ts`.
 
-## 5. Hướng dẫn cài đặt (Local Development)
+## 5. Hướng dẫn cài đặt ở máy Local 
 
 ### 5.1. Yêu cầu hệ thống
 
