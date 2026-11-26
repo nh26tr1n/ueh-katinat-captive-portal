@@ -46,19 +46,31 @@ Dự án gồm ứng dụng web Next.js và các migration cơ sở dữ liệu 
 ```text
 katinat-guest-wifi/
 ├── app/
-│   ├── (portal)/           # Giao diện Captive Portal cho khách (/portal) và điều hướng đăng nhập
-│   ├── admin/              # Giao diện cho quản trị viên (dashboard, analytics, customers, sessions, devices, vouchers, campaigns, send-email)
-│   ├── api/                # API Routes (auth callback, sessions, profile, consent, vouchers, campaigns, send-smtp, export-csv, unsubscribe)
-│   └── layout.tsx          # Root Layout, global styles và xử lý lỗi cấp ứng dụng
-├── components/             # UI components chia theo khu vực: portal/, admin/, dashboard/, charts/ và ui/ (shadcn/ui)
-├── hooks/                  # Custom React hooks (quản lý session heartbeat và ngắt kết nối)
-├── lib/                    # Nơi xử lý logic chính: kết nối database Supabase, kiểm tra quyền admin, gửi email (Brevo/Gmail) và kiểm tra dữ liệu đầu vào
-├── locales/                # File ngôn ngữ tiếng Việt (vi.json) và tiếng Anh (en.json)
-├── public/                 # Chứa hình ảnh hiển thị trên trang đăng nhập Wi-Fi
-├── scripts/                # Script hỗ trợ chụp ảnh giao diện tự động
-├── supabase/migrations/    # Các file lệnh SQL dùng để tạo bảng, cấu trúc dữ liệu và dữ liệu mẫu trên Supabase
-├── types/                  #  Khai báo kiểu dữ liệu dùng chung để tránh lỗi code trong toàn dự án
-└── middleware.ts           # Làm mới session Supabase và phân quyền truy cập /admin
+│   ├── (portal)/                         # Trang đăng nhập Wi-Fi và giao diện dành cho khách hàng
+│   ├── admin/                            # Trang quản trị (admin): xem thống kê, quản lý khách, phiên Wi-Fi, voucher và gửi email
+│   ├── api/                              # Nơi xử lý các tác vụ ngầm: đăng nhập, lưu phiên kết nối, gửi email và đổi voucher
+│   ├── layout.tsx                        # Khung giao diện chung cho toàn bộ trang web
+│   └── globals.css                       # Định dạng giao diện (CSS) áp dụng chung cho toàn dự án
+├── components/
+│   ├── admin/                            # Các khối giao diện dùng riêng cho trang quản trị (bảng dữ liệu, form nhập...)
+│   ├── portal/                           # Các khối giao diện dùng cho trang Wi-Fi của khách
+│   ├── charts/                           # Các loại biểu đồ thống kê doanh thu, lượt truy cập
+│   └── ui/                               # Các thành phần giao diện cơ bản dùng chung (nút bấm, ô nhập, hộp thoại...)
+├── hooks/                                # Hàm hỗ trợ theo dõi trạng thái kết nối Wi-Fi và tương tác giao diện
+├── lib/
+│   ├── services/                         # Xử lý logic chính và lấy dữ liệu từ database lên giao diện
+│   ├── supabase/                         # Thiết lập kết nối với cơ sở dữ liệu Supabase (cho trình duyệt, server và quyền admin)
+│   ├── validations/index.ts              # Kiểm tra tính hợp lệ của dữ liệu trước khi lưu (email, form, voucher...)
+│   ├── auth/                             # Kiểm tra tài khoản đăng nhập và phân quyền Admin
+│   ├── email/                            # Tạo mẫu email (template) và xử lý nội dung gửi mail
+│   └── utils.ts                          # Các hàm tiện ích nhỏ dùng chung ở nhiều nơi
+├── locales/                              # Bộ từ điển dịch giao diện sang tiếng Việt và tiếng Anh
+├── public/                               # Nơi lưu trữ hình ảnh, logo và các tệp tĩnh
+├── supabase/migrations/                  # Các tệp lệnh SQL dùng để tạo bảng và cấu trúc cơ sở dữ liệu
+├── types/index.ts                        # Khai báo định dạng dữ liệu dùng chung để tránh sai sót khi lập trình
+├── middleware.ts                         # "Người gác cổng": giữ trạng thái đăng nhập và chặn người lạ vào trang /admin
+├── next.config.js                        # Tệp cài đặt và cấu hình hoạt động cho Next.js
+└── package.json                          # Danh sách các thư viện cài đặt và các câu lệnh chạy dự án
 ```
 
 ### Luồng kết nối chính
